@@ -95,3 +95,4 @@ printTheBoard(theBoard)
 #TODO AI ideas:  set up a second board that gets updated with theBoard...  
     # This board will use 1s for the computer and .1s for the human player.  We can then do simple addition to look for the 
         #Win, block or or other placements...adding the numbers will tell us if we hit some of these conditions. 
+#TODO change from the selection of an X or O to asking if they want to go first or second.  
