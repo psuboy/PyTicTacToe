@@ -43,7 +43,9 @@ def computerPlay(board, board2, computerPiece):
             board2[k] = 1
             return
 
-def checkForTheWin(Board):
+#This functilon does not use the mumerical board which would be way easier....
+#TODO update this function to use numberical board.
+def checkForTheWin(Board): 
     #check diaginal
     if Board['TL'] != ' ' and Board['TL'] == Board['MM'] and Board['TL'] == Board['LR']:
         return Board['TL']
