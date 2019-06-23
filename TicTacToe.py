@@ -7,21 +7,22 @@ def printTheBoard(board):
     print('-----------')
     print(' ' + board['LL'] + ' | ' + board['LM'] + ' | ' + board['LR'] + ' ')
 
-def playSelection(board,marker):
+def playSelection(board,board2,marker):
     print('Enter the box where you want to play: ')
     print(' valid selections are: TL, TM, TR, ML, MM, MR, LL, LM, or LR')
     selection = input().upper()
     if selection in board.keys():
         if board[selection] == ' ':
             board[selection] = marker
+            board2[selection] = .1
         else:
             print('that field is already taken')
-            playSelection(board,marker)
+            playSelection(board,board2, marker)
     else:
         print('you did not enter a valid selection')
-        playSelection(board,marker)
+        playSelection(board,board2,marker)
 
-def computerPlay(board, computerPiece):
+def computerPlay(board, board2, computerPiece):
     #what piece does the human use?
     if computerPiece == 'O':
         playerPiece == 'X'
@@ -33,11 +34,13 @@ def computerPlay(board, computerPiece):
     #check for middle
     if board['MM'] == ' ':
         board['MM'] = computerPiece
+        board2['MM'] = 1
         return
     #select the first blank box and mark it.
     for k,v in board.items():
         if v == ' ':
             board[k] = computerPiece
+            board2[k] = 1
             return
 
 def checkForTheWin(Board):
@@ -62,13 +65,15 @@ def checkForTheWin(Board):
         return Board['LR']
     return 'No Winner'
 
+#theBoard is the X/O board
 theBoard = {'TL':' ','TM':' ','TR':' ','ML':' ','MM':' ','MR':' ','LL':' ','LM':' ','LR':' '}
-# The number of moves should be less than or equal to 9. if it is 9 or more that means the board is full.
+# numBoard is the mumerical representation of the board... 1 = cumputer move, .1 for the human moves
+numBoard = {'TL':0,'TM':0,'TR':0,'ML':0,'MM':0,'MR':0,'LL':0,'LM':0,'LR':0}
 
 print('Welcome to Tic Tac Toe.  Starting a new game.  Enter X to play X, or anything else to play O: ')
 playerPiece = input().upper()
 print('You are playing as '+ playerPiece)
-
+# The number of moves (represented by i in the for loop) should be less than or equal to 9. if it is 9 or more that means the board is full.
 for i in range(0,9):
 
     if i % 2 == 0:
@@ -79,9 +84,9 @@ for i in range(0,9):
     printTheBoard(theBoard)
 
     if playerPiece == move:
-        playSelection(theBoard, move)
+        playSelection(theBoard, numBoard, move)
     else:
-        computerPlay(theBoard, move)
+        computerPlay(theBoard,numBoard, move)
     result = checkForTheWin(theBoard)
     # TODO trouble shooting ...deleteprint('this is result' + result)
     if result == 'No Winner':
