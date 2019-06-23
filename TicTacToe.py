@@ -43,7 +43,7 @@ def computerPlay(board, board2, computerPiece):
             board2[k] = 1
             return
 
-#This functilon does not use the mumerical board which would be way easier....
+#This functilon checks to see if the game has been one by X or O.  It does not use the mumerical board which would be way easier....
 #TODO update this function to use numberical board.
 def checkForTheWin(Board): 
     #check diaginal
