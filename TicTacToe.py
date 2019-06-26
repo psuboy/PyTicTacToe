@@ -22,6 +22,71 @@ def playSelection(board,board2,marker):
         print('you did not enter a valid selection')
         playSelection(board,board2,marker)
 
+#This function checks to see if the computer can win on this play.
+def checForSituation(board,val):
+    # Check diagonal
+    if addThree(board, 'TL', 'MM', 'LR') == val:
+        if board['TL'] == 0:
+            return 'TL'
+        elif board['MM'] == 0:
+            return 'MM'
+        else:
+            return 'LR'
+    if addThree(board, 'TR', 'MM', 'LL') == val:
+        if board['TR'] == 0:
+            return 'TR'
+        elif board['MM'] == 0:
+            return 'MM'
+        else:
+            return 'LL'
+    #check vertical
+    if addThree(board, 'TR', 'MR','LR') == val:
+        if board['TR'] == 0:
+            return 'TR'
+        elif board['MR'] == 0:
+            return 'MR'
+        else:
+            return 'LR'
+    if addThree(board, 'TM', 'MM','LM') == val:
+        if board['TM'] == 0:
+            return 'TM'
+        elif board['MM'] == 0:
+            return 'MM'
+        else:
+            return 'LM'
+    if addThree(board, 'TL', 'ML','LL') == val:
+        if board['TL'] == 0:
+            return 'TL'
+        elif board['ML'] == 0:
+            return 'ML'
+        else:
+            return 'LL'
+    #check horizontal
+    if addThree(board, 'TL', 'TM','TR') == val:
+        if board['TL'] == 0:
+            return 'TL'
+        elif board['TM'] == 0:
+            return 'TM'
+        else:
+            return 'TR'
+    if addThree(board, 'ML', 'MM','MR') == val:
+        if board['ML'] == 0:
+            return 'ML'
+        elif board['MM'] == 0:
+            return 'MM'
+        else:
+            return 'MR'
+    if addThree(board, 'LL', 'LM','LR') == val:
+        if board['LL'] == 0:
+            return 'LL'
+        elif board['LM'] == 0:
+            return 'LM'
+        else:
+            return 'LR' 
+    return 'negative'
+
+
+
 def computerPlay(board, board2, computerPiece):
     #what piece does the human use?
     if computerPiece == 'O':
@@ -29,12 +94,11 @@ def computerPlay(board, board2, computerPiece):
     else:
         playerPiece =='O'
     #check to see if you can win
-    move = checkForSituation(board2,2)
-    if move != 'negitive'
-        #then fill in the selectin...
-
-
-
+    move = checForSituation(board2,2)
+    if move != 'negative':
+        board[move] = computerPiece
+        board2[move] = 1
+        return
     #check for Defensive plays:
     #check for empty corner
     #check for middle
@@ -48,70 +112,6 @@ def computerPlay(board, board2, computerPiece):
             board[k] = computerPiece
             board2[k] = 1
             return
-
-
-#This function checks to see if the computer can win on this play.
-def checForSituation(board,val):
-    # Check diagonal
-    if addThree(board, 'TL', 'MM', 'LR') == 2:
-        if board['TL'] == 0:
-            return 'TL'
-        if board['MM'] === 0:
-            return 'MM'
-        else:
-            return 'LR'
-    if addThree(board, 'TR', 'MM', 'LL') == 2:
-        if board['TR'] == 0:
-            return 'TR'
-        if board['MM'] === 0:
-            return 'MM'
-        else:
-            return 'LL'
-    #check vertical
-    if addThree(board, 'TR', 'MR','LR') == 2
-        if board['TR'] == 0:
-            return 'TR'
-        if board['MR'] === 0:
-            return 'MR'
-        else:
-            return 'LR'
-    if addThree(board, 'TM', 'MM','LM') == 2
-        if board['TM'] == 0:
-            return 'TM'
-        if board['MM'] === 0:
-            return 'MM'
-        else:
-            return 'LM'
-    if addThree(board, 'TL', 'ML','LL') == 2
-        if board['TL'] == 0:
-            return 'TL'
-        if board['ML'] === 0:
-            return 'ML'
-        else:
-            return 'LL'
-    #check horizontal
-    if addThree(board, 'TL', 'TM','TR') == 2
-        if board['TL'] == 0:
-            return 'TL'
-        if board['TM'] === 0:
-            return 'TM'
-        else:
-            return 'TR'
-    if addThree(board, 'ML', 'MM','MR') == 2
-        if board['ML'] == 0:
-            return 'ML'
-        if board['MM'] === 0:
-            return 'MM'
-        else:
-            return 'MR'
-    if addThree(board, 'LL', 'LM','LR') == 2
-        if board['LL'] == 0:
-            return 'LL'
-        if board['LM'] === 0:
-            return 'LM'
-        else:
-            return 'LR' 
-    
 
 
 def addThree(board,first,second,third):
@@ -140,6 +140,8 @@ def checkForTheWin(Board):
     if Board['LR'] != ' ' and Board['LR'] == Board['LM'] and Board['LR'] == Board['LL']:
         return Board['LR']
     return 'No Winner'
+
+
 
 #theBoard is the X/O board
 theBoard = {'TL':' ','TM':' ','TR':' ','ML':' ','MM':' ','MR':' ','LL':' ','LM':' ','LR':' '}
