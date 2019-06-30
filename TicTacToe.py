@@ -142,14 +142,28 @@ def checkForTheWin(Board):
     return 'No Winner'
 
 
+# **** Start of code  / end of functions
 
 #theBoard is the X/O board
 theBoard = {'TL':' ','TM':' ','TR':' ','ML':' ','MM':' ','MR':' ','LL':' ','LM':' ','LR':' '}
 # numBoard is the mumerical representation of the board... 1 = cumputer move, .1 for the human moves
 numBoard = {'TL':0,'TM':0,'TR':0,'ML':0,'MM':0,'MR':0,'LL':0,'LM':0,'LR':0}
 
-print('Welcome to Tic Tac Toe.  Starting a new game.  Enter X to play X, or anything else to play O: ')
-playerPiece = input().upper()
+print('Welcome to Tic Tac Toe.  Starting a new game.')
+# Player to choose first --> x, or second --> O
+while True:
+    print('Do you want to go first or second? ')
+    print('enter "F" for first or "S" for second.')
+    playerPiece = input().upper()
+    if playerPiece == "F":
+        playerPiece = "X" 
+        break
+    elif playerPiece == "S":
+        playerPiece = "O"
+        break
+    else:
+        print("You did not enter a valid input.")
+
 print('You are playing as '+ playerPiece)
 # The number of moves (represented by i in the for loop) should be less than or equal to 9. if it is 9 or more that means the board is full.
 for i in range(0,9):
